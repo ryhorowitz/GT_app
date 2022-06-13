@@ -1,5 +1,6 @@
 import './App.css';
-import Search from './Search'
+import Data from './components/Data'
+import Search from './components/Search'
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Search/>
+        <Data/>
       </header>
       <div>
       </div>
