@@ -1,6 +1,6 @@
 import './App.css';
-import Data from './components/Data'
 import Search from './components/Search'
+import GetAll from './components/GetAll';
 
 function App() {
 
@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Search/>
-        <Data/>
+        <GetAll/>
       </header>
       <div>
       </div>

@@ -4,7 +4,7 @@ class Data extends React.Component {
   constructor(props) {
       super(props);
       this.state = { 
-        data: ''
+        data: 'init data'
       };
     }
 
@@ -12,11 +12,15 @@ class Data extends React.Component {
     fetch('/search')
       .then(res => console.log('res is',res.json()))
       .then(data => {
-        this.setState({
-          data: data
-        })
+        console.log('data is', data);
+        // this.setState({
+        //   data: data
+        // })
       })
   }
+
+  //search by last name
+  // return JSON if found
   render () {
     return (
       <div>

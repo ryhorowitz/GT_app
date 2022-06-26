@@ -1,35 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-class Search extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { value: '' };
+function Search() {
+  const [search, setSearch] = useState("inits");
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handleChange(e) {
-        this.setState({ value: e.target.value })
-    }
-
-    handleSubmit(e) {
-        alert('A name was submitted: ' + this.state.value);
-        //hit the server with value
-        e.preventDefault();
-    }
-
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Name:
-                    <input type="text" value={this.state.value} onChange={this.handleChange} />
-                </label>
-                <input type="submit" value="Submit" />
-            </form>
-        );
-    }
+  return (
+    <form>
+      <label>
+        Name:
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </label>
+      <input type="submit" value="Submit" />
+    </form>
+  );
 }
 
 
