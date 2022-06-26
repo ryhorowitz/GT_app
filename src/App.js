@@ -1,7 +1,7 @@
 import './App.css';
 import Search from './components/Search';
 import GetAll from './components/GetAll';
-import Button from './components/Button';
+import GetAllButton from './components/GetAllButton';
 
 function App() {
 
@@ -9,8 +9,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Search/>
-        <Button/>
-        <GetAll/>
+        <GetAllButton/>
+        {/* <GetAll/> */}
       </header>
       <div>
       </div>
