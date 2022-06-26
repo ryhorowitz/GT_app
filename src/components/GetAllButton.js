@@ -7,7 +7,10 @@ function GetAllButton() {
   const getCases = () => {
     fetch('http://localhost:3000/case-files')
       .then(res => res.json())
-      .then(res => console.log('res is', res))
+      .then(res => {
+        console.log('res is', res)
+        return res
+      })
       .then(res => {
         setCases(res);
         setLoading(false);
@@ -34,19 +37,19 @@ function GetAllButton() {
           </tr>
         </thead>
         <tbody>
-          {cases.length === 0 ?
+          {cases ?
+            cases.map((x, key) => <tr key={key}>
+              <td >{x.caseNumber}</td>
+              <td>{x.firstName}</td>
+              <td>{x.lastName}</td>
+              <td>{x.status}</td>
+            </tr>)
+              :
             <tr>
               <td className="text-center" colSpan="4">
                 <b>No data found to display.</b>
               </td>
-            </tr>
-            :
-            cases.map(x => <tr>
-              <td>{x.caseNumber}</td>
-              <td>{x.firstName}</td>
-              <td>{x.lastName}</td>
-              <td>{x.status}</td>
-            </tr>)}
+            </tr>}
 
         </tbody>
       </table>
