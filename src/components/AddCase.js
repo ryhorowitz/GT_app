@@ -1,27 +1,56 @@
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 function AddCase() {
-  const [values, setValues] = useState({
-    caseNumber: "",
-    firstName: "",
-    lastName: "",
-    status: ""
-  });
-
+  const {register, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    console.log(data)
+    fetch('http://localhost:3000/case-files', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
+    .then(()=>{})
+    .catch(err => { 
+      console.log('Error message: ', err);
+    }
+  )}
+   
   return (
-    <>
-    </>
-  )
+    <form onSubmit={handleSubmit(onSubmit)}>
+       <label>Case Number:</label>
+      <input
+        type="text"
+        {...register("caseNumber", { required: true, maxLength: 7 })}
+        //validate that casenumber is unique
+      />
+      <br></br>
+      <label>First name</label>
+      <input
+        type="text"
+        {...register("firstName", { required: true, maxLength: 80 })}
+      />
+      <br></br>
+      <label>Last name</label>
+      <input
+        type="text"
+        {...register("lastName", { required: true, maxLength: 100 })}
+      />
+      <br></br>
+      <label>Status:</label>
+      <select {...register("status")}>
+        <option value="active">active</option>
+        <option value="inactive">inactive</option>
+        <option value="closed">closed</option>
+      </select>
+      <input type="submit" />
+    </form>
+  );
 }
 
 export default AddCase;
 
 //   <form>
-// <label>Case Number:
-// <input
-//   type="text"
-//   value={values.caseNumber}
-//   onChange={(e) => setValues(e.target.value)}>
+// 
 // </input>
 // </label>
 // <br></br>
