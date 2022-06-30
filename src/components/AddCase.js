@@ -25,13 +25,13 @@ function AddCase() {
         //validate that casenumber is unique
       />
       <br></br>
-      <label>First name</label>
+      <label>First name:</label>
       <input
         type="text"
         {...register("firstName", { required: true, maxLength: 80 })}
       />
       <br></br>
-      <label>Last name</label>
+      <label>Last name:</label>
       <input
         type="text"
         {...register("lastName", { required: true, maxLength: 100 })}

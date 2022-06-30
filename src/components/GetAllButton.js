@@ -13,26 +13,30 @@ function GetAllButton() {
         return res
       })
       .then(res => {
-        setCases(res);
+        setCases(res); //instead of overwriting maybe push in the array
         setLoading(false);
       })
       .catch(err => console.error('ERROR', err))
     //update state to false
   }
 
-  const deleteCase = () => {
-    console.log('toDelete is', toDelete)
+  const deleteCase = (string) => {
+    // we can access the cases from state
+    //
+    console.log('toDelete is', string)
+    //get case# from clicked row
     fetch('http://localhost:3000/case-files', {
       method: 'DELETE',
       headers: { 'Content-type': 'application/json'},
-      body: JSON.stringify(toDelete) 
+      body: JSON.stringify(string) 
     })
     .then(response => {
       return response.json()
     })
     .then(data => 
       // this is the data we get after doing the delete request, do whatever you want with this data
-      console.log(data) 
+      console.log(data)
+      //remove case from list of cases 
     ).catch(err => console.error('ERROR', err))
   }
 
@@ -55,16 +59,17 @@ function GetAllButton() {
           </tr>
         </thead>
         <tbody>
-          {cases ?
+          {(cases.length > 0) ?
             cases.map((x, key) => <tr key={key}>
-              <td >{x.caseNumber}</td>
+              <td>{x.caseNumber}</td>
               <td>{x.firstName}</td>
               <td>{x.lastName}</td>
               <td>{x.status}</td>
               <td>
                 <button
                 onClick={() => {
-                  deleteCase();
+                  console.log('case#', x.caseNumber)
+                  deleteCase(x.caseNumber);
                 }}>Delete</button>
               </td>
             </tr>)
