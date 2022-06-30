@@ -3,6 +3,7 @@ import { useState } from 'react';
 function GetAllButton() {
   const [loading, setLoading] = useState(false);
   const [cases, setCases] = useState([]);
+  const [toDelete, setToDelete] = useState('');
 
   const getCases = () => {
     fetch('http://localhost:3000/case-files')
@@ -17,6 +18,22 @@ function GetAllButton() {
       })
       .catch(err => console.error('ERROR', err))
     //update state to false
+  }
+
+  const deleteCase = () => {
+    console.log('toDelete is', toDelete)
+    fetch('http://localhost:3000/case-files', {
+      method: 'DELETE',
+      headers: { 'Content-type': 'application/json'},
+      body: JSON.stringify(toDelete) 
+    })
+    .then(response => {
+      return response.json()
+    })
+    .then(data => 
+      // this is the data we get after doing the delete request, do whatever you want with this data
+      console.log(data) 
+    ).catch(err => console.error('ERROR', err))
   }
 
   return (
@@ -34,6 +51,7 @@ function GetAllButton() {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Status</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +61,12 @@ function GetAllButton() {
               <td>{x.firstName}</td>
               <td>{x.lastName}</td>
               <td>{x.status}</td>
+              <td>
+                <button
+                onClick={() => {
+                  deleteCase();
+                }}>Delete</button>
+              </td>
             </tr>)
               :
             <tr>
