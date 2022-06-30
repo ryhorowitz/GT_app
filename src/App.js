@@ -1,6 +1,5 @@
 import './App.css';
 import Search from './components/Search';
-import GetAll from './components/GetAll';
 import GetAllButton from './components/GetAllButton';
 import AddCase from './components/AddCase';
 
@@ -13,7 +12,6 @@ function App() {
         <br></br>
         <Search/>
         <GetAllButton/>
-        {/* <GetAll/> */}
       </header>
       <div>
       </div>
