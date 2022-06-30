@@ -7,10 +7,11 @@ function AddCase() {
     console.log(data)
     fetch('http://localhost:3000/case-files', {
       method: 'POST',
+      headers: {"Content-Type": "application/json"},
       body: JSON.stringify(data)
     })
-    .then(()=>{})
-    .catch(err => { 
+    .then( res => console.log('res is', res))
+    .catch( err => { 
       console.log('Error message: ', err);
     }
   )}
