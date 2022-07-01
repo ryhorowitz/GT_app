@@ -11,6 +11,8 @@ function App() {
         <AddCase/>
         <br></br>
         <Search/>
+        <br></br>
+        <br></br>
         <GetAllButton/>
       </header>
       <div>

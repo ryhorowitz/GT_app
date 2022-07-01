@@ -1,9 +1,12 @@
 import { useState } from 'react';
+// import { useForm } from 'react-hook-form';
 
 function GetAllButton() {
   const [loading, setLoading] = useState(false);
   const [cases, setCases] = useState([]);
-  const [toDelete, setToDelete] = useState('');
+  const [toUpdateStatus, setToUpdateStatus] = useState('');
+  // const [toDelete, setToDelete] = useState('');
+  // const {register, handleSubmit } = useForm();
 
   const getCases = () => {
     fetch('http://localhost:3000/case-files')
@@ -23,29 +26,46 @@ function GetAllButton() {
   const deleteCase = (data) => {
     fetch('http://localhost:3000/case-files', {
       method: 'DELETE',
-      headers: { 'Content-type': 'application/json'},
-      body: JSON.stringify({data}) 
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify({ data })
     })
-    .then(res => {
-      console.log(res)
-      return res.json()
+      .then(res => {
+        console.log(res)
+        return res.json()
+      })
+      .then(data => {
+        console.log('File was deleted', data)
+        //remove case from list of cases
+        getCases();
+      })
+      .catch(err => console.error('ERROR', err))
+  }
+
+  const updateStatus = (data) => {
+    console.log('update is', data)
+    fetch('http://localhost:3000/case-files', {
+      method: '',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify({ data })
     })
-    .then(data => {
-      console.log('File was deleted', data)
-      //remove case from list of cases
-      getCases();
-    })
-    .catch(err => console.error('ERROR', err))
+      .then(() => { })
+      .catch(() => { })
   }
 
   return (
     <>
-      <button
-        onClick={() => {
-          setLoading(true);
-          getCases();
-        }}
-      >{loading ? 'Loading...' : 'Get All Cases'}</button>
+      <span>
+        <button
+          onClick={() => {
+            setLoading(true);
+            getCases();
+          }}
+        >{loading ? 'Loading...' : 'Get All Cases'}</button>
+        <button
+          onClick={() => {
+            setCases([]);
+          }}>Clear</button>
+      </span>
       <table>
         <thead>
           <tr>
@@ -54,6 +74,7 @@ function GetAllButton() {
             <th>Last Name</th>
             <th>Status</th>
             <th>Delete</th>
+            <th>Change Status</th>
           </tr>
         </thead>
         <tbody>
@@ -65,16 +86,34 @@ function GetAllButton() {
               <td>{x.status}</td>
               <td>
                 <button
-                onClick={() => {
-                  console.log('case#', x.caseNumber)
-                  deleteCase(x.caseNumber);
-                }}>Delete</button>
+                  onClick={() => {
+                    console.log('case#', x.caseNumber)
+                    deleteCase(x.caseNumber);
+                  }}>Delete</button>
+              </td>
+              <td>
+                <select onChange={(e) => {
+                  const newStatus = e.target.value;
+                  setToUpdateStatus(newStatus);
+                }}>
+                  <option value="active">active</option>
+                  <option value="inactive">inactive</option>
+                  <option value="closed">closed</option>
+                </select>
+              </td>
+              <td>
+                <button
+                  onClick={() => {
+                    // grab selected value and send to server Patch?
+                    updateStatus(toUpdateStatus);
+                  }}
+                >Update</button>
               </td>
             </tr>)
-              :
+            :
             <tr>
               <td className="text-center" colSpan="4">
-                <b>No data found to display.</b>
+                <b></b>
               </td>
             </tr>}
 
