@@ -20,24 +20,22 @@ function GetAllButton() {
     //update state to false
   }
 
-  const deleteCase = (string) => {
-    // we can access the cases from state
-    //
-    console.log('toDelete is', string)
-    //get case# from clicked row
+  const deleteCase = (data) => {
     fetch('http://localhost:3000/case-files', {
       method: 'DELETE',
       headers: { 'Content-type': 'application/json'},
-      body: JSON.stringify(string) 
+      body: JSON.stringify({data}) 
     })
-    .then(response => {
-      return response.json()
+    .then(res => {
+      console.log(res)
+      return res.json()
     })
-    .then(data => 
-      // this is the data we get after doing the delete request, do whatever you want with this data
-      console.log(data)
-      //remove case from list of cases 
-    ).catch(err => console.error('ERROR', err))
+    .then(data => {
+      console.log('File was deleted', data)
+      //remove case from list of cases
+      getCases();
+    })
+    .catch(err => console.error('ERROR', err))
   }
 
   return (
