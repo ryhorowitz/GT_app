@@ -18,6 +18,7 @@ function AddCase() {
    
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <h2>Add Case</h2>
        <label>Case Number:</label>
       <input
         type="text"
