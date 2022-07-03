@@ -5,13 +5,13 @@ function Search() {
 
   const { register, handleSubmit } = useForm();
 
-  const findCase = (caseNumber) => {
+  const findCase = ( { caseNumber }) => {
     console.log('caseNumber:', caseNumber)
     // 
-    fetch(`http://localhost:3000/search${caseNumber}`)
+    fetch(`http://localhost:3000/case-file/${caseNumber}`)
       // then
-      .then(res => res.json)
-      .then(data => console.log('case info:', data))
+      .then(res => res.json())
+      .then(data => console.log('case info:', data[0]))
       .catch(err => console.error('ERROR:', err))
   }
   return (
