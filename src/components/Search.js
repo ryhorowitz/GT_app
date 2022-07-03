@@ -48,8 +48,11 @@ function Search() {
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({ status })
     })
-      .then(() => { })
-      .catch(() => { })
+      .then( res => res.json())
+      .then( update => {
+        console.log('File Updated:', update)
+      })
+      .catch( err => console.error('ERROR', err))
   }
 
   return (
