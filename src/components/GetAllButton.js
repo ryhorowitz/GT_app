@@ -66,20 +66,20 @@ function GetAllButton() {
             setCases([]);
           }}>Clear</button>
       </span>
-      <table>
-        <thead>
-          <tr>
-            <th>Case Number</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Status</th>
-            <th>Delete</th>
-            <th>Change Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {(cases.length > 0) ?
-            cases.map((x, key) => <tr key={key}>
+      {(cases.length > 0) ?
+        <table>
+          <thead>
+            <tr>
+              <th>Case Number</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Status</th>
+              <th>Delete</th>
+              <th>Change Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {cases.map((x, key) => <tr key={key}>
               <td>{x.caseNumber}</td>
               <td>{x.firstName}</td>
               <td>{x.lastName}</td>
@@ -109,16 +109,11 @@ function GetAllButton() {
                   }}
                 >Update</button>
               </td>
-            </tr>)
-            :
-            <tr>
-              <td className="text-center" colSpan="4">
-                <b></b>
-              </td>
-            </tr>}
-
-        </tbody>
-      </table>
+            </tr>)}
+          </tbody>
+        </table>
+        :
+        null}
     </>
   )
 };

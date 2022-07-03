@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 
 function AddCase() {
   const {register, handleSubmit } = useForm();
+  
   const onSubmit = (data) => {
     console.log(data)
     fetch('http://localhost:3000/case-files', {
