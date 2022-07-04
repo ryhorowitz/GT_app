@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 function AddCase() {
@@ -45,6 +45,13 @@ function AddCase() {
         <option value="inactive">inactive</option>
         <option value="closed">closed</option>
       </select>
+      <br></br>
+      <label>Year:</label>
+      <input
+        type="text"
+        {...register("year", { required: true, maxLength: 4 })}
+      />
+      <br></br>
       <input type="submit" />
     </form>
   );

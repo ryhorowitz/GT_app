@@ -74,6 +74,7 @@ function GetAllButton() {
               <th>First Name</th>
               <th>Last Name</th>
               <th>Status</th>
+              <th>Year</th>
               <th>Delete</th>
               <th>Change Status</th>
             </tr>
@@ -84,6 +85,7 @@ function GetAllButton() {
               <td>{x.firstName}</td>
               <td>{x.lastName}</td>
               <td>{x.status}</td>
+              <td>{x.year}</td>
               <td>
                 <button
                   onClick={() => {
