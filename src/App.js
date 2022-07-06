@@ -1,4 +1,5 @@
 import './App.css';
+import logo from "./img/GT-Logo.png"
 import Search from './components/Search';
 import GetAllButton from './components/GetAllButton';
 import AddCase from './components/AddCase';
@@ -15,8 +16,9 @@ function App() {
         <br></br>
         <GetAllButton/>
       </header>
-      <div>
-      </div>
+      {/* <div>
+        <img className="logo" src={logo} alt="GT-Logo"></img>
+      </div> */}
     </div>
   );
 }
