@@ -1,4 +1,5 @@
 import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import logo from "./img/GT-Logo.png"
 import Search from './components/Search';
 import GetAllButton from './components/GetAllButton';
