@@ -11,7 +11,7 @@ function Search() {
   const findCaseById = ({ caseNumber }) => {
     console.log('caseNumber:', caseNumber)
     setCases([]);
-    fetch(`http://localhost:3000/case-file/${caseNumber}`)
+    fetch(`http://localhost:3001/case-file/${caseNumber}`)
       // then
       .then(res => res.json())
       .then(data => {
@@ -25,10 +25,10 @@ function Search() {
   }
 
   const findCaseByLastName = ({ lastName }) => {
-    lastName = lastName.toUpperCase;
+    lastName = lastName.toUpperCase();
     console.log('lastName:', lastName)
     setCases([]);
-    fetch(`http://localhost:3000/lastName/?lastName=${lastName}`)
+    fetch(`http://localhost:3001/lastName/?lastName=${lastName}`)
       // then
       .then(res => res.json())
       .then(data => {
@@ -42,7 +42,7 @@ function Search() {
   }
 
   const deleteCase = (data) => {
-    fetch('http://localhost:3000/case-files', {
+    fetch('http://localhost:3001/case-files', {
       method: 'DELETE',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({ data })
@@ -61,7 +61,7 @@ function Search() {
   const updateStatus = (status) => {
     console.log('update is', status)
     console.log('update case is', updateCase)
-    fetch(`http://localhost:3000/case-files/update/${updateCase}`, {
+    fetch(`http://localhost:3001/case-files/update/${updateCase}`, {
       method: 'PUT',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify({ status })
