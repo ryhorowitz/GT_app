@@ -46,3 +46,9 @@ body {
 .nav li:hover {
   background-color: #666;
 }
+
+.searchTable {
+  align-items: center;
+  margin: 1rem;
+  
+}

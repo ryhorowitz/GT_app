@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 
 function Search() {
   const [cases, setCases] = useState([]);
-  const [toUpdateStatus, setToUpdateStatus] = useState('');
+  const [toUpdateStatus, setToUpdateStatus] = useState('active');
   const [updateCase, setToUpdateCase] = useState('');
 
   const { register, handleSubmit } = useForm();
 
-  const findCase = ({ caseNumber }) => {
+  const findCaseById = ({ caseNumber }) => {
     console.log('caseNumber:', caseNumber)
     setCases([]);
     fetch(`http://localhost:3000/case-file/${caseNumber}`)
@@ -23,6 +23,24 @@ function Search() {
       })
       .catch(err => console.error('ERROR:', err))
   }
+
+  const findCaseByLastName = ({ lastName }) => {
+    lastName = lastName.toUpperCase;
+    console.log('lastName:', lastName)
+    setCases([]);
+    fetch(`http://localhost:3000/lastName/?lastName=${lastName}`)
+      // then
+      .then(res => res.json())
+      .then(data => {
+        console.log('case info:', data[0])
+        if (data[0] === undefined) {
+          console.error('File not found.')
+        }
+        setCases(data);
+      })
+      .catch(err => console.error('ERROR:', err))
+  }
+
   const deleteCase = (data) => {
     fetch('http://localhost:3000/case-files', {
       method: 'DELETE',
@@ -57,12 +75,20 @@ function Search() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(findCase)}>
+      <form onSubmit={handleSubmit(findCaseById)}>
         <h2>Search Form</h2>
-        <label>Case Number:</label>
+        <label>Case Number: </label>
         <input
           type="text"
-          {...register("caseNumber", { required: true, maxLength: 7 })}
+          {...register("caseNumber", { required: true, maxLength: 6 })}
+        />
+        <input type="submit" />
+      </form>
+      <form onSubmit={handleSubmit(findCaseByLastName)}> 
+        <label>Last Name</label>
+        <input
+          type="text"
+          {...register("lastName", { required: true, maxLength: 30 })}
         />
         <input type="submit" />
       </form>
@@ -71,12 +97,12 @@ function Search() {
           setCases([]);
         }}>Clear</button>
       {cases.length > 0 ?
-        <table>
+        <table className='searchTable'>
           <thead>
             <tr>
               <th>Case Number</th>
-              <th>First Name</th>
               <th>Last Name</th>
+              <th>First Name</th>
               <th>Status</th>
               <th>Year</th>
               <th>Delete</th>
@@ -86,8 +112,8 @@ function Search() {
           <tbody>
             {cases.map((x, key) => <tr key={key}>
               <td>{x.caseNumber}</td>
-              <td>{x.firstName}</td>
               <td>{x.lastName}</td>
+              <td>{x.firstName}</td>
               <td>{x.status}</td>
               <td>{x.year}</td>
               <td>
