@@ -73,8 +73,14 @@ body {
   align-items: center;
   padding: .25rem;
 }
-.search-table {
+.results-table {
   align-items: center;
-  margin: 1rem;
-  
+  margin: 1.5rem;
+  justify-content: center;
+  display: flex;
+
+}
+
+.results-table th {
+  padding: 5px;
 }
