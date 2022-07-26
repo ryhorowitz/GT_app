@@ -13,7 +13,7 @@ function NameSearch() {
     console.log('firstName is', firstName)
     console.log('lastName:', lastName)
     setCases([]);
-    fetch(`http://localhost:3001/lastName/?lastName=${lastName}`)
+    fetch(`http://localhost:3001/name-search/?firstname=${firstName}&lastname=${lastName}`)
       // then
       .then(res => res.json())
       .then(data => {
@@ -64,12 +64,12 @@ function NameSearch() {
         <label>First Name</label>
         <input
           type="text"
-          {...register("firstName", { required: true, maxLength: 30 })}
+          {...register("firstName", {maxLength: 30 })}
         />
         <label>Last Name</label>
         <input
           type="text"
-          {...register("lastName", { required: true, maxLength: 30 })}
+          {...register("lastName", {maxLength: 30 })}
         />
         <input type="submit" />
       </form>
@@ -78,53 +78,55 @@ function NameSearch() {
           setCases([]);
         }}>Clear</button>
       {cases.length > 0 ?
-        <table className='searchTable'>
-          <thead>
-            <tr>
-              <th>Case Number</th>
-              <th>Last Name</th>
-              <th>First Name</th>
-              <th>Status</th>
-              <th>Year</th>
-              <th>Delete</th>
-              <th>Change Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cases.map((x, key) => <tr key={key}>
-              <td>{x.caseNumber}</td>
-              <td>{x.lastName}</td>
-              <td>{x.firstName}</td>
-              <td>{x.status}</td>
-              <td>{x.year}</td>
-              <td>
-                <button
-                  onClick={() => {
-                    console.log('case#', x.caseNumber)
-                    deleteCase(x.caseNumber);
-                  }}>Delete</button>
-              </td>
-              <td>
-                <select onChange={(e) => {
-                  const newStatus = e.target.value;
-                  setToUpdateStatus(newStatus);
-                }}>
-                  <option value="active">active</option>
-                  <option value="inactive">inactive</option>
-                  <option value="closed">closed</option>
-                </select>
-              </td>
-              <td>
-                <button
-                  onClick={() => {
-                    updateStatus(toUpdateStatus);
-                    setToUpdateCase(x.caseNumber);
-                  }}
-                >Update</button>
-              </td>
-            </tr>)}
-          </tbody>
-        </table>
+        <div className='results-table'>  
+          <table>
+            <thead>
+              <tr>
+                <th>Case Number</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Status</th>
+                <th>Year</th>
+                <th>Delete</th>
+                <th>Change Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cases.map((x, key) => <tr key={key}>
+                <td>{x.caseNumber}</td>
+                <td>{x.lastName}</td>
+                <td>{x.firstName}</td>
+                <td>{x.status}</td>
+                <td>{x.year}</td>
+                <td>
+                  <button
+                    onClick={() => {
+                      console.log('case#', x.caseNumber)
+                      deleteCase(x.caseNumber);
+                    }}>Delete</button>
+                </td>
+                <td>
+                  <select onChange={(e) => {
+                    const newStatus = e.target.value;
+                    setToUpdateStatus(newStatus);
+                  }}>
+                    <option value="active">active</option>
+                    <option value="inactive">inactive</option>
+                    <option value="closed">closed</option>
+                  </select>
+                </td>
+                <td>
+                  <button
+                    onClick={() => {
+                      updateStatus(toUpdateStatus);
+                      setToUpdateCase(x.caseNumber);
+                    }}
+                  >Update</button>
+                </td>
+              </tr>)}
+            </tbody>
+          </table>
+          </div>
         : null}
 
     </>
