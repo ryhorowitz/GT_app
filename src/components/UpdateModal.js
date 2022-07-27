@@ -1,16 +1,16 @@
-import '../modal.css'
+import ReactDOM from 'react'
 
-export default function UpdateModal( handleClose, show, children ) {
-  const showHideClassName = show ? "modal display-block" : "modal display-none";
-  console.log('show is', show)
-  return (
-    <div className={showHideClassName}>
-      <section className="modal-main">
+export default function UpdateModal({ open, children, onClose }) {
+
+  if (!open) return null;
+
+  return ReactDOM.createPortal(
+    <>
+      <div>
+        <button onClick={() => { onClose() }}>Close Modal</button>
         {children}
-        <button type="button"onClick={handleClose()}>
-          Close
-        </button>
-      </section>
-    </div>
-  );
+      </div>
+    </>,
+    document.getElementById('portal')
+  )
 }

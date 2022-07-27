@@ -15,15 +15,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-// function CustomLink({ to, children, ...props }) {
-//   const path = ""
-
-//   return (
-//     <li className={path === to ? "active" : ""}>
-//       <Link to={to} {...props}>
-//         {children}
-//         </Link>
-//     </li>
-//   )
-//}
