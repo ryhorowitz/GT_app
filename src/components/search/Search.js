@@ -3,9 +3,6 @@ import { useForm } from 'react-hook-form';
 
 function Search() {
   const [cases, setCases] = useState([]);
-  const [toUpdateStatus, setToUpdateStatus] = useState('active');
-  const [updateCase, setToUpdateCase] = useState('');
-
   const { register, handleSubmit } = useForm();
 
   const findCaseByName = ({ firstName, lastName }) => {
@@ -43,21 +40,6 @@ function Search() {
       .catch(err => console.error('ERROR', err))
   }
 
-  const updateStatus = (status) => {
-    console.log('update is', status)
-    console.log('update case is', updateCase)
-    fetch(`http://localhost:3001/case-files/update/${updateCase}`, {
-      method: 'PUT',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify({ status })
-    })
-      .then(res => res.json())
-      .then(update => {
-        console.log('File Updated:', update)
-      })
-      .catch(err => console.error('ERROR', err))
-  }
-
   return (
     <>
       <form onSubmit={handleSubmit(findCaseByName)}>
@@ -87,8 +69,8 @@ function Search() {
                 <th>First Name</th>
                 <th>Status</th>
                 <th>Year</th>
-                <th>Delete</th>
-                <th>Change Status</th>
+                {/* <th>Delete</th>
+                <th>Change Status</th> */}
               </tr>
             </thead>
             <tbody>
@@ -98,7 +80,7 @@ function Search() {
                 <td>{x.firstName}</td>
                 <td>{x.status}</td>
                 <td>{x.year}</td>
-                <td>
+                {/* <td>
                   <button
                     onClick={() => {
                       console.log('case#', x.caseNumber)
@@ -108,19 +90,16 @@ function Search() {
                 <td>
                   <select onChange={(e) => {
                     const newStatus = e.target.value;
-                    setToUpdateStatus(newStatus);
+
                   }}>
                     <option value="active">active</option>
                     <option value="inactive">inactive</option>
                     <option value="closed">closed</option>
                   </select>
-                </td>
+                </td> */}
                 <td>
                   <button
-                    onClick={() => {
-                      updateStatus(toUpdateStatus);
-                      setToUpdateCase(x.caseNumber);
-                    }}
+                    onClick={() => {}}
                   >Update</button>
                 </td>
               </tr>)}
