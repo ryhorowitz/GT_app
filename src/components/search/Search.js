@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 function Search() {
   const [cases, setCases] = useState([]);
@@ -46,12 +47,12 @@ function Search() {
         <label>First Name</label>
         <input
           type="text"
-          {...register("firstName", {maxLength: 30 })}
+          {...register("firstName", { maxLength: 30 })}
         />
         <label>Last Name</label>
         <input
           type="text"
-          {...register("lastName", {maxLength: 30 })}
+          {...register("lastName", { maxLength: 30 })}
         />
         <input type="submit" />
       </form>
@@ -60,7 +61,7 @@ function Search() {
           setCases([]);
         }}>Clear</button>
       {cases.length > 0 ?
-        <div className='results-table'>  
+        <div className='results-table'>
           <table>
             <thead>
               <tr>
@@ -68,7 +69,7 @@ function Search() {
                 <th>Last Name</th>
                 <th>First Name</th>
                 <th>Status</th>
-                <th>Year</th>
+                {/* <th>Year</th> */}
                 {/* <th>Delete</th>
                 <th>Change Status</th> */}
               </tr>
@@ -79,7 +80,7 @@ function Search() {
                 <td>{x.lastName}</td>
                 <td>{x.firstName}</td>
                 <td>{x.status}</td>
-                <td>{x.year}</td>
+                {/* <td>{x.year}</td> */}
                 {/* <td>
                   <button
                     onClick={() => {
@@ -97,15 +98,15 @@ function Search() {
                     <option value="closed">closed</option>
                   </select>
                 </td> */}
-                <td>
-                  <button
-                    onClick={() => {}}
-                  >Update</button>
+                <td className='update'>
+                  <Link to='../update'
+                        state={ cases[key] }
+                  >UPDATE</Link>
                 </td>
               </tr>)}
             </tbody>
           </table>
-          </div>
+        </div>
         : null}
 
     </>

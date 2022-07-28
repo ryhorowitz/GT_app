@@ -3,8 +3,7 @@ import Navbar from '../src/components/Navbar';
 import Home from './components/Home';
 import AddCase from './components/AddCase';
 import Search from './components/search/Search';
-import CaseFileSearch from './components/search/CaseFileSearch';
-import NameSearch from './components/search/NameSearch';
+import Update from './components/Update';
 import { Route, Routes } from "react-router-dom";
 function App() {
   return (
@@ -15,11 +14,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='add-case' element={<AddCase />} />
-        <Route path='search' element={<Search />}>
-          <Route path='name' element={<NameSearch />}/>
-          <Route path='case-number' element={<CaseFileSearch />}/>
-        </Route>
-
+        <Route path='search' element={<Search />} />
+        <Route path='update' element={<Update />} />
       </Routes>
     </div>
     </>
