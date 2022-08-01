@@ -99,8 +99,10 @@ function Search() {
                   </select>
                 </td> */}
                 <td className='update'>
-                  <Link to='../update'
-                        state={ cases[key] }
+                  <Link to={{
+                    pathname: `/update/${x.caseNumber}`,
+                    state: {stateParam: true}
+                  }}
                   >UPDATE</Link>
                 </td>
               </tr>)}
