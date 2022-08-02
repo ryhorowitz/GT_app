@@ -1,10 +1,31 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 
 function Search() {
   const [cases, setCases] = useState([]);
+  const [pageNumber, setPageNumber] = useState(0);
+
   const { register, handleSubmit } = useForm();
+
+  const usersPerPage = 10;
+  const pagesVisited = pageNumber * usersPerPage; 
+
+  const displayCases = cases
+    .slice(pagesVisited, pagesVisited + usersPerPage)
+    .map((x, key) => <tr key={key}>
+    <td>{x.caseNumber}</td>
+    <td>{x.lastName}</td>
+    <td>{x.firstName}</td>
+    <td>{x.status}</td>
+    <td className='update'>
+      <Link to={{
+        pathname: `/update/${x.caseNumber}`
+      
+      }}>UPDATE</Link>
+    </td>
+  </tr>)
 
   const findCaseByName = ({ firstName, lastName }) => {
     lastName = lastName.toUpperCase();
@@ -75,37 +96,7 @@ function Search() {
               </tr>
             </thead>
             <tbody>
-              {cases.map((x, key) => <tr key={key}>
-                <td>{x.caseNumber}</td>
-                <td>{x.lastName}</td>
-                <td>{x.firstName}</td>
-                <td>{x.status}</td>
-                {/* <td>{x.year}</td> */}
-                {/* <td>
-                  <button
-                    onClick={() => {
-                      console.log('case#', x.caseNumber)
-                      deleteCase(x.caseNumber);
-                    }}>Delete</button>
-                </td>
-                <td>
-                  <select onChange={(e) => {
-                    const newStatus = e.target.value;
-
-                  }}>
-                    <option value="active">active</option>
-                    <option value="inactive">inactive</option>
-                    <option value="closed">closed</option>
-                  </select>
-                </td> */}
-                <td className='update'>
-                  <Link to={{
-                    pathname: `/update/${x.caseNumber}`,
-                    state: {stateParam: true}
-                  }}
-                  >UPDATE</Link>
-                </td>
-              </tr>)}
+              {displayCases}
             </tbody>
           </table>
         </div>

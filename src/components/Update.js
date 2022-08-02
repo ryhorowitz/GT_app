@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
-export default function Update( props ) {
+import { useParams } from 'react-router-dom'
 
-  const type = useParams().type;
-  const stateParams  = useLocation().state;
-  console.log("Props Parameter Value - " + type);
-  console.log("Props State Value - " + stateParams);
-
+export default function Update() {
+  const caseNumber = useParams().caseNumber;
+  console.log("Props Parameter Value - " + caseNumber);
+  
+  //useEffect GET for caseNumber
   return (
     <>
     <h2>UPDATE</h2>

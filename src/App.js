@@ -15,7 +15,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='add-case' element={<AddCase />} />
         <Route path='search' element={<Search />} />
-        <Route path='update/:type' element={<Update />} />
+        <Route path='update/:caseNumber' element={<Update />} />
       </Routes>
     </div>
     </>
