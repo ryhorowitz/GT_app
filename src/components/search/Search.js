@@ -69,20 +69,24 @@ function Search() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(findCaseByName)}>
-        <label>First Name</label>
-        <input
-          type="text"
-          {...register("firstName", { maxLength: 30 })}
-        />
-        <label>Last Name</label>
-        <input
-          type="text"
-          {...register("lastName", { maxLength: 30 })}
-        />
-        <input type="submit" />
+      <form className='search-form' onSubmit={handleSubmit(findCaseByName)}>
+        <div className='search-input'>
+          <label>First Name: </label>
+          <input
+            type="text"
+            {...register("firstName", { maxLength: 30 })}
+          />
+        </div>
+        <div className='search-input'>
+          <label>Last Name: </label>
+          <input
+            type="text"
+            {...register("lastName", { maxLength: 30 })}
+          />
+        <input className='' type="submit" />
+        </div>
       </form>
-      <button
+      <button className=''
         onClick={() => {
           setCases([]);
           setPageNumber(0)

@@ -47,6 +47,13 @@ body {
   background-color: #666;
 }
 
+.search-form {
+  padding: 1rem;
+}
+
+.search-input {
+  margin: .5rem;
+}
 .search-options {
   padding: 0;
   margin: 0;
@@ -84,9 +91,7 @@ body {
 .results-table th {
   padding: 5px;
 }
-td .update {
-  
-} 
+
 .update a {
   background-color: rgb(180, 173, 173);
   color: inherit;
