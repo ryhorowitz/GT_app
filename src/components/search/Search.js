@@ -10,23 +10,28 @@ function Search() {
   const { register, handleSubmit } = useForm();
 
   const usersPerPage = 10;
-  const pagesVisited = pageNumber * usersPerPage; 
+  const pagesVisited = pageNumber * usersPerPage;
 
   const displayCases = cases
     .slice(pagesVisited, pagesVisited + usersPerPage)
     .map((x, key) => <tr key={key}>
-    <td>{x.caseNumber}</td>
-    <td>{x.lastName}</td>
-    <td>{x.firstName}</td>
-    <td>{x.status}</td>
-    <td className='update'>
-      <Link to={{
-        pathname: `/update/${x.caseNumber}`
-      
-      }}>UPDATE</Link>
-    </td>
-  </tr>)
+      <td>{x.caseNumber}</td>
+      <td>{x.lastName}</td>
+      <td>{x.firstName}</td>
+      <td>{x.status}</td>
+      <td className='update'>
+        <Link to={{
+          pathname: `/update/${x.caseNumber}`
 
+        }}>UPDATE</Link>
+      </td>
+    </tr>)
+
+  const pageCount = Math.ceil(cases.length / usersPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  }
   const findCaseByName = ({ firstName, lastName }) => {
     lastName = lastName.toUpperCase();
     console.log('firstName is', firstName)
@@ -80,25 +85,39 @@ function Search() {
       <button
         onClick={() => {
           setCases([]);
+          setPageNumber(0)
         }}>Clear</button>
       {cases.length > 0 ?
-        <div className='results-table'>
-          <table>
-            <thead>
-              <tr>
-                <th>Case Number</th>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Status</th>
-                {/* <th>Year</th> */}
-                {/* <th>Delete</th>
-                <th>Change Status</th> */}
-              </tr>
-            </thead>
-            <tbody>
-              {displayCases}
-            </tbody>
-          </table>
+        <div>
+          <div className='results-table'>
+            <table>
+              <thead>
+                <tr>
+                  <th>Case Number</th>
+                  <th>Last Name</th>
+                  <th>First Name</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {displayCases}
+
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <ReactPaginate
+              previousLabel={'< Previous'}
+              nextLabel={'Next >'}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={'paginationBttns'}
+              previousLinkClassName={'previousBttn'}
+              nextLinkClassName={'nextBttn'}
+              disabledClassName={'paginationDisabled'}
+              activeClassName={'paginationActive'}
+            />
+          </div>
         </div>
         : null}
 
