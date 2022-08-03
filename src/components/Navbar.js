@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <nav className='nav'>
       <Link to='/' className="site-title">
-        GT LAW
+      <img className='logo' src='/img/GT-logo-light.png' alt='' />
       </Link>
       <ul>
           <Link to='/add-case'>Add Case</Link>

@@ -8,7 +8,6 @@ import { Route, Routes } from "react-router-dom";
 function App() {
   return (
     <>
-    <h1>GT Case Status App</h1>
     <Navbar />
     <div className='container'>
       <Routes>

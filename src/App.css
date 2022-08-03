@@ -6,6 +6,7 @@ body {
   margin: 0;
 }
 
+
 .container {
   margin: 1rem;
   text-align: center;
@@ -20,9 +21,11 @@ body {
   padding: 0 1rem;
 }
 
-.site-title {
-  font-size: 2rem;
+img.logo {
+  width: 10rem;
+  height: 10rem;
 }
+
 .nav ul {
   padding: 0;
   margin: 0;
@@ -35,8 +38,9 @@ body {
   text-decoration: none;
   height: 100%;
   display: flex;
-  align-items: center;
+  align-items: end;
   padding: .25rem;
+  font-size: 1.5rem;
 }
 
 .nav li:active {

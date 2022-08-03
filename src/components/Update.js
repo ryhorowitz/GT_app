@@ -8,9 +8,7 @@ export default function Update() {
   
   //useEffect GET for caseNumber
   useEffect(() => {
-    console.log('caseNumber to update is ', caseNumber)
     fetch(`http://localhost:3001/case-file/${caseNumber}`)
-      // then
       .then(res => res.json())
       .then(data => {
         console.log('case info:', data[0])
